@@ -22,9 +22,23 @@ body{
     margin:0;
 }
 
-.clock{font-size:14vw;font-weight:600;}
+.clock{
+    font-size:14vw;
+    font-weight:600;
+    letter-spacing:0.1em;
+}
+
+.colon{
+    animation:blink 1s steps(1) infinite;
+}
+
+@keyframes blink{
+    50%{opacity:0;}
+}
+
 .date{font-size:4vw;font-weight:600;margin-top:.6rem;}
 .day{font-size:3.5vw;margin-top:.4rem;}
+
 .weather{margin-top:1.2rem;text-align:center;}
 
 .weather-now{
@@ -69,10 +83,11 @@ body{
 function updateTime(){
     const n=new Date();
     const d=['Vasárnap','Hétfő','Kedd','Szerda','Csütörtök','Péntek','Szombat'];
-    clock.textContent=
-        String(n.getHours()).padStart(2,'0')+":"+
-        String(n.getMinutes()).padStart(2,'0')+":"+
-        String(n.getSeconds()).padStart(2,'0');
+
+    const h=String(n.getHours()).padStart(2,'0');
+    const m=String(n.getMinutes()).padStart(2,'0');
+
+    clock.innerHTML=`${h}<span class="colon">:</span>${m}`;
     date.textContent=n.toLocaleDateString('hu-HU',{year:'numeric',month:'long',day:'numeric'});
     day.textContent=d[n.getDay()];
 }
