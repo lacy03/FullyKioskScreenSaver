@@ -1,76 +1,37 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Óra és dátum</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
-
-    <style>
-        body {
-            background-color: black;
-            color: white;
-            font-family: "Outfit", sans-serif;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .clock {
-            font-size: 15vw;
-            font-weight: 600;
-        }
-
-        .date {
-            font-size: 4vw;
-            font-weight: 600;
-            margin-top: 0.5rem;
-        }
-
-        .weather {
-            font-size: 3vw;
-            font-weight: 400;
-            margin-top: 1.5rem;
-            opacity: 0.9;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teszt óra</title>
+  <style>
+    body {
+      background: black;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-size: 10vw;
+      font-family: Arial, sans-serif;
+    }
+  </style>
 </head>
-
 <body>
 
-    <div class="clock" id="clock"></div>
-    <div class="date" id="date"></div>
-    <div class="weather" id="weather"></div>
+<div id="clock">BETÖLT…</div>
 
-    <script>
-        function updateTime() {
-            const now = new Date();
+<script>
+  function updateClock() {
+    const now = new Date();
+    document.getElementById("clock").textContent =
+      now.getHours().toString().padStart(2, '0') + ":" +
+      now.getMinutes().toString().padStart(2, '0');
+  }
 
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
+  updateClock();
+  setInterval(updateClock, 1000);
+</script>
 
-            const days = [
-                'Vasárnap',
-                'Hétfő',
-                'Kedd',
-                'Szerda',
-                'Csütörtök',
-                'Péntek',
-                'Szombat'
-            ];
-
-            const day = days[now.getDay()];
-
-            const date = now.toLocaleDateString('hu-HU', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
-
-            document.getElementById('clock').textContent = `${hours}:${minutes}`;
+</body>
+</html>
